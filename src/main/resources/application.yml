@@ -1,0 +1,18 @@
+server.port: 8080
+
+spring.datasource:
+  hikari.connection-timeout: 20000
+  hikari.maximum-pool-size: 5
+  url: jdbc:postgresql://localhost:5432/vicko
+  username: vicko_admin
+  password: ******
+
+spring.flyway:
+  url: jdbc:postgresql://localhost:5432/vicko
+  schema: jokes, party
+  user: vicko_admin
+  password: ******
+  
+logging.level:
+  org.springframework: debug
+  sql: debug
