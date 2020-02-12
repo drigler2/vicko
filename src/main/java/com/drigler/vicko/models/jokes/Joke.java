@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -25,6 +26,7 @@ public class Joke {
     private Integer id;
     @NotNull
     @OneToOne(targetEntity = Category.class)
+    @JoinColumn(name = "id_category", referencedColumnName = "id")
     private final Category category;
     @NotNull
     private final String content;

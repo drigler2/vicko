@@ -3,6 +3,7 @@ package com.drigler.vicko.services;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,12 @@ public class JokeService implements IJokeService {
         jokeRepo.findAll().forEach(j -> unordered.add(j));
 
         return unordered;
+    }
+
+    @Override
+    public Optional<Joke> getById(Integer id) {
+
+        return jokeRepo.findById(id);
     }
 
 }
