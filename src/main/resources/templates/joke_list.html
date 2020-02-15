@@ -23,22 +23,21 @@
         <td><span th:text="${joke.dislikes}"> Dislikes </span></td>
         <td>
           <form action="/like" th:method="post">
-            <input type="text" th:value="${joke.id}" name="idJoke" hidden="true" />
-            <input th:value="l" type="submit" class="btn btn-success" />
+            <input type="hidden" th:value="${joke.id}" name="idJoke" />
+            <input value="&#8593;" type="submit" class="btn btn-success likeButton"  />
           </form>
           <form action="/dislike" th:method="post">
             <input type="hidden" th:value="${joke.id}" name="idJoke" />
-            <input th:value="dl" type="submit" class="btn btn-danger" />
+            <input value="&#8595;" type="submit" class="btn btn-danger dislikeButton" />
           </form>
       </td>
       </tr>
   </tbody>
   </table>
-  <script>
-
-  </script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script>
+  </script>
 </body>
 </html>
