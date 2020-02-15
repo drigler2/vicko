@@ -20,7 +20,8 @@ public class CategoryServiceTest {
     @Test
     void insertCategoryTest() {
 
-        Category cat = new Category("not funny");
+        Category cat = new Category();
+        cat.setName(("not funny"));
         catService.saveCategory(cat);
 
     }

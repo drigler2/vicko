@@ -11,15 +11,13 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+//@RequiredArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "joke", schema = "jokes")
@@ -29,16 +27,27 @@ public class Joke {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @NotNull
     @OneToOne(targetEntity = Category.class)
     @JoinColumn(name = "id_category", referencedColumnName = "id")
-    private final Category category;
+    private Category category;
+
     @NotNull
-    private final String content;
+    private String content;
+
     private Integer likes;
     private Integer dislikes;
 
+    /**
+     * handles null errors from db siletly. TODO: this should be handeled somewhere
+     * else
+     **/
     public Integer computePopularity() {
+
+        if (likes == null || dislikes == null) {
+            return 0;
+        }
 
         return likes - dislikes;
     }

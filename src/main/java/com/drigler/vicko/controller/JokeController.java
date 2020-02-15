@@ -1,14 +1,24 @@
 package com.drigler.vicko.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.drigler.vicko.factory.JokeFactory;
+import com.drigler.vicko.models.forms.JokeForm;
+import com.drigler.vicko.models.jokes.Category;
+import com.drigler.vicko.models.jokes.Joke;
+import com.drigler.vicko.services.ICategoryService;
 import com.drigler.vicko.services.IJokeService;
 
 @Controller
@@ -17,11 +27,13 @@ import com.drigler.vicko.services.IJokeService;
 public class JokeController {
 
     private final IJokeService jService;
+    private final ICategoryService catService;
 
     @Autowired
-    public JokeController(IJokeService jService) {
+    public JokeController(IJokeService jService, ICategoryService catService) {
 
         this.jService = jService;
+        this.catService = catService;
     }
 
     @GetMapping
@@ -35,28 +47,75 @@ public class JokeController {
     @PostMapping("like")
     public String like(HttpServletRequest request) {
 
+        Integer idJoke = null;
         try {
-            Integer idJoke = Integer.parseInt(request.getParameter("idJoke"));
-            jService.like(idJoke);
+            idJoke = Integer.parseInt(request.getParameter("idJoke"));
         }
         catch (NumberFormatException e) {
             return "redirect:/";
         }
 
+        jService.like(idJoke);
         return "redirect:/";
     }
 
     @PostMapping("dislike")
     public String dislike(HttpServletRequest request) {
 
+        Integer idJoke = null;
         try {
-            Integer idJoke = Integer.parseInt(request.getParameter("idJoke"));
-            jService.dislike(idJoke);
+            idJoke = Integer.parseInt(request.getParameter("idJoke"));
         }
         catch (NumberFormatException e) {
             return "redirect:/";
         }
 
+        jService.dislike(idJoke);
         return "redirect:/";
     }
+
+    @GetMapping("new")
+    public String newJokeEdit(JokeForm jokeForm) {
+
+        return "new_joke";
+    }
+
+    @PostMapping("new")
+    public String newJokeSave(@Valid JokeForm jokeForm, BindingResult result) {
+
+        if (result.hasErrors()) {
+            return "new_joke";
+        }
+
+        Joke joke = JokeFactory.newJokeFromForm(jokeForm);
+        jService.saveJoke(joke);
+
+        return "redirect:/new";
+    }
+
+    @GetMapping("new2")
+    @Deprecated
+    public String newJokeEdit2(Model model) {
+
+        model.addAttribute("joke", new Joke());
+        model.addAttribute("categoryList2", catService.getAll());
+
+        return "new_joke2";
+    }
+
+    @ModelAttribute("categoryList")
+    public List<Category> populateCategories() {
+
+        return catService.getAll();
+    }
+
+    @PostMapping("new2")
+    @Deprecated
+    public String newJokeSave2(@ModelAttribute Joke joke) {
+
+        jService.saveJoke(joke);
+
+        return "redirect:/new";
+    }
+
 }
