@@ -19,6 +19,9 @@ target/
 *.iml
 *.ipr
 
+### pmd ###
+.eclipse-pmd
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
