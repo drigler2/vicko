@@ -5,10 +5,10 @@ import com.drigler.vicko.models.jokes.Joke;
 
 public class JokeFactory {
 
-    public static Joke newFunnyJoke() {
+    public static Joke newFunnyJoke(Category cat) {
 
-        Category cat = new Category("funny");
-        return new Joke(cat, "Why did the chicken cross the road? To get to the other side.");
+        return new Joke(null, cat, "Why did the chicken cross the road? To get to the other side.",
+            0, 0);
     }
 
 }

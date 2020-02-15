@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.drigler.vicko.factory.JokeFactory;
+import com.drigler.vicko.models.jokes.Category;
 import com.drigler.vicko.models.jokes.Joke;
 
 @SpringBootTest
@@ -23,10 +24,11 @@ public class JokeServiceTest {
         this.jService = jokeService;
     }
 
-    // @Test
+    @Test
     void insertJoke() {
 
-        Joke joke = JokeFactory.newFunnyJoke();
+        Category cat = jService.getById(1).get().getCategory();
+        Joke joke = JokeFactory.newFunnyJoke(cat);
         jService.saveJoke(joke);
 
         List<Joke> jokes = jService.getAll();
@@ -54,4 +56,25 @@ public class JokeServiceTest {
         assertThat(result).isNotEmpty();
     }
 
+    @Test
+    void like() {
+
+        Optional<Joke> joke = jService.getById(0);
+        int oldLikes = joke.get().getLikes();
+        jService.like(joke.get());
+        joke = jService.getById(joke.get().getId());
+
+        assertThat(joke.get().getLikes()).isGreaterThan(oldLikes);
+    }
+
+    @Test
+    void likeId() {
+
+        Optional<Joke> joke = jService.getById(0);
+        int oldLikes = joke.get().getLikes();
+        jService.like(joke.get().getId());
+        joke = jService.getById(joke.get().getId());
+
+        assertThat(joke.get().getLikes()).isGreaterThan(oldLikes);
+    }
 }
