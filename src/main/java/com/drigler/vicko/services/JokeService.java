@@ -30,7 +30,7 @@ public class JokeService implements IJokeService {
         Iterable<Joke> jokeList = jokeRepo.findAll();
 
         jokeList.forEach(j -> ordered.add(j));
-        Collections.sort(ordered, new JokeScoreComparator());
+        Collections.sort(ordered, new JokeScoreComparator().reversed());
 
         return ordered;
     }
@@ -54,6 +54,33 @@ public class JokeService implements IJokeService {
     public Optional<Joke> getById(Integer id) {
 
         return jokeRepo.findById(id);
+    }
+
+    @Override
+    public void like(Integer idJoke) {
+
+        jokeRepo.like(idJoke);
+    }
+
+    @Override
+    public void dislike(Integer IdJoke) {
+
+        jokeRepo.dislike(IdJoke);
+
+    }
+
+    @Override
+    public void like(Joke joke) {
+
+        joke.setLikes(joke.getLikes() + 1);
+        jokeRepo.save(joke);
+    }
+
+    @Override
+    public void dislike(Joke joke) {
+
+        joke.setDislikes(joke.getDislikes() + 1);
+        jokeRepo.save(joke);
     }
 
 }

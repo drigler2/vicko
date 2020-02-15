@@ -2,6 +2,7 @@ package com.drigler.vicko.services;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,12 @@ public class CategoryService implements ICategoryService {
     public void saveCategory(Category category) {
 
         catRepo.save(category);
+    }
+
+    @Override
+    public Optional<Category> getById(Integer id) {
+
+        return catRepo.findById(id);
     }
 
 }

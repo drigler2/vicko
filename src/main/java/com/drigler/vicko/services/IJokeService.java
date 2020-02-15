@@ -15,4 +15,12 @@ public interface IJokeService {
 
     public Optional<Joke> getById(Integer id);
 
+    public void like(Joke joke);
+
+    public void dislike(Joke joke);
+
+    void like(Integer idJoke);
+
+    void dislike(Integer IdJoke);
+
 }
