@@ -93,29 +93,10 @@ public class JokeController {
         return "redirect:/new";
     }
 
-    @GetMapping("new2")
-    @Deprecated
-    public String newJokeEdit2(Model model) {
-
-        model.addAttribute("joke", new Joke());
-        model.addAttribute("categoryList2", catService.getAll());
-
-        return "new_joke2";
-    }
-
     @ModelAttribute("categoryList")
     public List<Category> populateCategories() {
 
         return catService.getAll();
-    }
-
-    @PostMapping("new2")
-    @Deprecated
-    public String newJokeSave2(@ModelAttribute Joke joke) {
-
-        jService.saveJoke(joke);
-
-        return "redirect:/new";
     }
 
 }
