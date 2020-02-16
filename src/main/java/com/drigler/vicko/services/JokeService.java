@@ -27,7 +27,7 @@ public class JokeService implements IJokeService {
     public List<Joke> getAllOrderByLikesMinusDislikes() {
 
         List<Joke> ordered = new LinkedList<>();
-        Iterable<Joke> jokeList = jokeRepo.findAll();
+        Iterable<Joke> jokeList = jokeRepo.findAllOrdered();
 
         jokeList.forEach(j -> ordered.add(j));
         Collections.sort(ordered, new JokeScoreComparator().reversed());

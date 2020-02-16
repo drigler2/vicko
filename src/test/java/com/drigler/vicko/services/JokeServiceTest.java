@@ -24,7 +24,7 @@ public class JokeServiceTest {
         this.jService = jokeService;
     }
 
-    @Test
+//    @Test
     void insertJoke() {
 
         Category cat = jService.getById(1).get().getCategory();

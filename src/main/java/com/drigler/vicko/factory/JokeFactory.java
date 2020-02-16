@@ -4,7 +4,10 @@ import com.drigler.vicko.models.forms.JokeForm;
 import com.drigler.vicko.models.jokes.Category;
 import com.drigler.vicko.models.jokes.Joke;
 
-//@NoArgsConstructor(access = AccessLevel.PRIVATE)
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class JokeFactory {
 
     public static Joke newFunnyJoke(Category cat) {

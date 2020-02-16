@@ -13,6 +13,7 @@ import com.drigler.vicko.models.jokes.Joke;
 @Repository
 public interface IJokeRepository extends CrudRepository<Joke, Integer> {
 
+    static final String GET_ALL = "select * from jokes.joke order by likes-dislikes desc";
     static final String LIKE_QUERY = "update Joke set likes=likes+1 where id=?1";
     static final String DISLIKE_QUERY = "update Joke set dislikes=dislikes+1 where id=?1";
 
@@ -25,5 +26,8 @@ public interface IJokeRepository extends CrudRepository<Joke, Integer> {
     @Modifying
     @Query(DISLIKE_QUERY)
     public void dislike(@Param("id") Integer id);
+
+    @Query(value = GET_ALL, nativeQuery = true)
+    public Iterable<Joke> findAllOrdered();
 
 }
