@@ -3,11 +3,14 @@ package com.drigler.vicko.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.drigler.vicko.models.jokes.Joke;
 
 public interface IJokeService {
 
-    public List<Joke> getAllOrderByLikesMinusDislikes();
+    public Page<Joke> getAllOrderByLikesMinusDislikes(Pageable pageable);
 
     public void saveJoke(Joke joke);
 

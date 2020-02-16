@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import com.drigler.vicko.factory.JokeFactory;
 import com.drigler.vicko.models.jokes.Category;
@@ -24,7 +26,17 @@ public class JokeServiceTest {
         this.jService = jokeService;
     }
 
-//    @Test
+    @Test
+    void insert50Jokes() {
+
+        for (int i = 0; i < 50; i++) {
+            System.out.print(i);
+            insertJoke();
+        }
+
+    }
+
+    @Test
     void insertJoke() {
 
         Category cat = jService.getById(1).get().getCategory();
@@ -38,7 +50,7 @@ public class JokeServiceTest {
     @Test
     void getAllOrdered() {
 
-        List<Joke> jList = jService.getAllOrderByLikesMinusDislikes();
+        Page<Joke> jList = jService.getAllOrderByLikesMinusDislikes(PageRequest.of(0, 10));
         assertThat(jList).isNotEmpty();
     }
 

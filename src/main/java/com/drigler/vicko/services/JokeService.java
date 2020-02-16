@@ -1,15 +1,15 @@
 package com.drigler.vicko.services;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.drigler.vicko.models.jokes.Joke;
-import com.drigler.vicko.models.jokes.JokeScoreComparator;
 import com.drigler.vicko.repositories.IJokeRepository;
 
 @Service
@@ -24,15 +24,9 @@ public class JokeService implements IJokeService {
     }
 
     @Override
-    public List<Joke> getAllOrderByLikesMinusDislikes() {
+    public Page<Joke> getAllOrderByLikesMinusDislikes(Pageable pageable) {
 
-        List<Joke> ordered = new LinkedList<>();
-        Iterable<Joke> jokeList = jokeRepo.findAllOrdered();
-
-        jokeList.forEach(j -> ordered.add(j));
-        Collections.sort(ordered, new JokeScoreComparator().reversed());
-
-        return ordered;
+        return jokeRepo.findAllOrdered(pageable);
     }
 
     @Override
