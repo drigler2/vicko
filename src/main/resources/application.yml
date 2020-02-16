@@ -12,7 +12,3 @@ spring.flyway:
   schema: jokes, party
   user: vicko_admin
   password: ******
-  
-logging.level:
-  org.springframework: debug
-  sql: debug
