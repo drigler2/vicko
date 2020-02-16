@@ -26,7 +26,7 @@ public class JokeServiceTest {
         this.jService = jokeService;
     }
 
-    @Test
+//    @Test
     void insert50Jokes() {
 
         for (int i = 0; i < 50; i++) {

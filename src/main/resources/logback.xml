@@ -16,7 +16,7 @@
   <logger name="org.springframework" level="INFO">
     <appender-ref ref="STDOUT" />
   </logger>
-  <logger name="org.hibernate" level="DEBUG">
+  <logger name="org.hibernate" level="INFO">
     <appender-ref ref="STDOUT" />
   </logger>
 </configuration>
