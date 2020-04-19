@@ -5,10 +5,10 @@ spring.datasource:
   hikari.maximum-pool-size: 5
   url: jdbc:postgresql://localhost:5432/vicko
   username: vicko_admin
-  password: ******
+  password: password
 
 spring.flyway:
   url: jdbc:postgresql://localhost:5432/vicko
-  schema: jokes, party
+  schema: jokes
   user: vicko_admin
-  password: ******
+  password: password

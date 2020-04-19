@@ -40,7 +40,7 @@ public class Joke {
     private Integer dislikes;
 
     /**
-     * handles null errors from db siletly. TODO: this should be handeled somewhere
+     * handles null errors from db silently. TODO: this should be handled somewhere
      * else
      **/
     public Integer computePopularity() {
